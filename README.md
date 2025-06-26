@@ -102,7 +102,7 @@ Below is how your Postman's Authorization tab(🟩green-highlighted) will look l
 
 ### Screenshot Example
 
-![Postman OAuth Configuration](screenshots/postman-oauth-setup.png)
+![Postman OAuth Configuration](postman/postman-oauth-setup.png)
 
 1. Click **"Get New Access Token"**
 This will open a browser window for Azure AD login and fetch an access token.
