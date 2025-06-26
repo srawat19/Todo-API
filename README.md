@@ -114,5 +114,15 @@ Ensure the **Header Prefix** is set to Bearer
 
 ✅ Now, you are all set to make API calls.  
 
+---
+## 📘 Swagger & OpenAPI
+
+The project uses **Swashbuckle** to auto-generate Swagger UI from OpenAPI specs and XML comments.
+
+- ✅ Custom OpenAPI metadata (title, version, contact info)
+- ✅ XML comments from controllers and DTOs
+- ✅ OAuth2 with PKCE Swagger integration
+- ✅ Paginated DTO schema filter using `ISchemaFilter`
+
 
 
