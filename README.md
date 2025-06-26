@@ -87,12 +87,32 @@ To test the API quickly using Postman:
 
 ```bash
 /postman/TodoApi.postman_collection.json
-/postman/TodoApi.postman_environmentVariables.json
-
-
+```
 > Postman is used here to simulate a **public client** using the API with OAuth2 + PKCE.
 
-🛑 **Important:** Replace placeholders in the environment file with your actual Azure AD details (Tenant ID, Client ID, Scope, etc.)
+🛑 **Important:** Replace below placeholders in the 'TodoApi.postman_collection' file with your actual Azure AD details.
+
+-> `{your-tenantId}` : Your Azure AD(Entra ID) Tenant ID
+
+-> `{your-frontend-app-id}` : Application(client) ID of your Front-end app or Postman App on Azure. 
+
+-> `{your-backend-app-id}` :  Application(client) ID of your Backend Todo API on Azure.
+
+Below is how your Postman's Authorization tab(🟩green-highlighted) will look like, once all the values are filled in as per above instructions. 
 
 ### Screenshot Example
+
+![Postman OAuth Configuration](screenshots/postman-oauth-setup.png)
+
+1. Click **"Get New Access Token"**
+This will open a browser window for Azure AD login and fetch an access token.
+
+2. After successful login, click **"Use Token"**
+The token will be injected into Postman's Current Token field (🔵 blue-highlighted).
+
+Ensure the **Header Prefix** is set to Bearer
+
+✅ Now, you are all set to make API calls.  
+
+
 
