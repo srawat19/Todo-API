@@ -84,7 +84,7 @@ This API uses **OAuth 2.0 Authorization Code Flow with PKCE**, designed for secu
    - Click **Add a permission**
    - Add delegated access to `todo-api-backend` using its Application(client) ID
 4. Under **Authentication**:
-  - Click ** Add a platform**
+  - Click **Add a platform**
   - Select SPA (This is needed to work with Swagger)
   - Add Swagger redirect url 'https://localhost:7280/todoApi/docs/oauth2-redirect.html'
   - Add Postman redirect url 'https://oauth.pstmn.io/v1/callback'
