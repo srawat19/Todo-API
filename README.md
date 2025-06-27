@@ -3,8 +3,21 @@
 This **Todo REST API** allows users to manage their to-do list. It's built with **C#**, **.NET 8**, and integrated with **Azure AD** for secure user authentication via **OAuth 2.0 (Authorization Code Flow with PKCE)**.
 
 ---
+## Tech Stack
 
-## 🚀 Features
+<p>
+  <img src= "https://img.shields.io/badge/C%23-003f90?style=for-the-badge" alt="C#"/>
+  <img src= "https://img.shields.io/badge/.NET-512bd4?style=for-the-badge" alt=".NET"/>
+  <img src= "https://img.shields.io/badge/Azure%20AD-1e90ff?style=for-the-badge" alt="Azure AD"/>
+  <img src= "https://img.shields.io/badge/SQL%20SERVER-ffef00?style=for-the-badge" alt="SQL Server"/>
+  <img src= "https://img.shields.io/badge/Entity_Framework-512bd4?style=for-the-badge" alt="EF Core"/>
+  <img src= "https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge" alt="Swagger"/>
+  <img src= "https://img.shields.io/badge/xUnit-512bd4?style=for-the-badge" alt="xUnit"/>
+  <img src= "https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge" alt="Postman"/>
+  <img src= "https://img.shields.io/badge/Visual%20Studio-663399?style=for-the-badge" alt="Visual Studio"/>
+</p>
+
+## 🚀 Key Features
 
 - 🧱 **Clean Architecture**
 - 🔐 **Azure AD Authentication + PKCE**
@@ -78,19 +91,57 @@ This API uses **OAuth 2.0 Authorization Code Flow with PKCE**, designed for secu
 2. Assign app roles (`admin`, `user`) to users
 
 ---
+## ⚙️ Getting Started
+Once the project is cloned, there are 2 ways to interact with API :
 
-## 📬 Postman Setup
+### 🚀 **Option 1: Using Swagger UI**
 
-To test the API quickly using Postman:
+✅ **Configuration**
 
-1. Import the Postman collection:
+1. Edit **appsettings.json**
+Replace placeholder values in the "AzureAd" section:
+`
+"AzureAd": {
+  "TenantId": "{your-tenant-id}",
+  "ClientId": "{your-frontend-app-id}",
+  "Audience": "{your-backend-app-id}",
+  "Domain": "{your-azure-domain}"`
 
-```bash
-/postman/TodoApi.postman_collection.json
-```
+2. Edit **SwaggerServiceExtensions.cs**
+Replace hardcoded values used for OAuth2 flow in Swagger UI setup:
+`
+AuthorizationUrl = new Uri("https://login.microsoftonline.com/{your-tenant-id}/oauth2/v2.0/authorize"),
+TokenUrl = new Uri("https://login.microsoftonline.com/{your-tenant-id}/oauth2/v2.0/token"),
+Scopes = new Dictionary<string, string>
+{
+    { "api://{your-backend-app-id}/access-as-user", "Access Todo API" }
+}
+`
+✅ This enables the Authorize button in Swagger UI for OAuth2.
+
+> [!IMPORTANT]
+Updating above files with your Azure values is required to run the project with **Swagger**
+
+▶️ **Run**
+1. Run the API: dotnet run
+2. Open https://localhost:7280/todoApi/docs/index.html
+3. Click Authorize, login via Azure AD
+
+Use Try it out to call endpoints.
+
+---
+### 📬 **Option 2: Using Postman**
+
+#### ✅ **Configuration**
+
+- Update `appsetting.json`(similar to above Swagger option)
+- No need to modify ` SwaggerServiceExtensions.cs`
+- Import the Postman collection from ``/postman/TodoApi.postman_collection.json``
+
 > Postman is used here to simulate a **public client** using the API with OAuth2 + PKCE.
 
-🛑 **Important:** Replace below placeholders in the 'TodoApi.postman_collection' file with your actual Azure AD details.
+#### 🔑 Authorization Setup:
+Once the import is successful, use the Postman's Authorization tab to update below placeholders with actual values. 
 
 -> `{your-tenantId}` : Your Azure AD(Entra ID) Tenant ID
 
@@ -100,15 +151,18 @@ To test the API quickly using Postman:
 
 Below is how your Postman's Authorization tab(🟩green-highlighted) will look like, once all the values are filled in as per above instructions. 
 
-### Screenshot Example
+##### Screenshot Example
 
-![Postman OAuth Configuration](postman/postman-oauth-setup.png)
+![Postman OAuth Configuration](assets/postman-oauth-setup.png)
 
+#### ▶️ Running Postman:
 1. Click **"Get New Access Token"**
+   
 This will open a browser window for Azure AD login and fetch an access token.
 
-2. After successful login, click **"Use Token"**
-The token will be injected into Postman's Current Token field (🔵 blue-highlighted).
+3. After successful login, click **"Use Token"**
+   
+The token will be injected into Postman's current Token field (🔵 blue-highlighted in above image).
 
 Ensure the **Header Prefix** is set to Bearer
 
@@ -120,9 +174,20 @@ Ensure the **Header Prefix** is set to Bearer
 The project uses **Swashbuckle** to auto-generate Swagger UI from OpenAPI specs and XML comments.
 
 - ✅ Custom OpenAPI metadata (title, version, contact info)
-- ✅ XML comments from controllers and DTOs
-- ✅ OAuth2 with PKCE Swagger integration
-- ✅ Paginated DTO schema filter using `ISchemaFilter`
+- ✅ XML comments from controllers
+- ✅ Security Definition (OAuth2 + PKCE)
+- ✅ Schema customization using SchemaFilter
 
+🔗Swagger UI Url : https://localhost:7280/todoApi/docs/index.html
 
+![Swagger UI](assets/swagger-ui.png)
+
+> [!IMPORTANT]
+> The port (`7280`) may vary depending on your local setup. Update the API & Swagger URL if your project runs on a different port.
+
+## 🤝 Contributing
+This is a personal project but any suggestions or recommendations are welcome.
+
+## 📄 License
+This project is licensed under the [MIT License] (LICENSE).
 
