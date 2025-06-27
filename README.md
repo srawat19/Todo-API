@@ -82,7 +82,12 @@ This API uses **OAuth 2.0 Authorization Code Flow with PKCE**, designed for secu
 2. Create app: `postman-as-frontend`
 3. Under **API Permissions**:
    - Click **Add a permission**
-   - Add delegated access to `todo-api-backend` using its Application ID
+   - Add delegated access to `todo-api-backend` using its Application(client) ID
+4. Under **Authentication**:
+  - Click ** Add a platform**
+  - Select SPA (This is needed to work with Swagger)
+  - Add Swagger redirect url 'https://localhost:7280/todoApi/docs/oauth2-redirect.html'
+  - Add Postman redirect url 'https://oauth.pstmn.io/v1/callback'
 
 ### 3️⃣ Create Users and Assign Roles
 
@@ -130,6 +135,8 @@ Scopes = new Dictionary<string, string>
 {
     { "api://{your-backend-app-id}/access-as-user", "Access Todo API" }
 }
+
+action.OAuthClientId("<your-frontend-app-id>");
 ```
 ✅ This enables the Authorize button in Swagger UI for OAuth2.
 
