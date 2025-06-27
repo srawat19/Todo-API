@@ -162,8 +162,11 @@ Use **Try it out** to call endpoints.
 
 ##### 🔑 Authorization Setup:
 Once the import is successful, use the Postman's Authorization tab to update below placeholders with actual values. 
+
 -> `{your-tenantId}` : Your Azure AD(Entra ID) Tenant ID
+
 -> `{your-frontend-app-id}` : Application(client) ID of your Front-end app or Postman App on Azure. 
+
 -> `{your-backend-app-id}` :  Application(client) ID of your Backend Todo API on Azure.
 
 Below is how your Postman's Authorization tab(🟩green-highlighted) will look like, once all the values are filled in as per above instructions. 
