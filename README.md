@@ -1,13 +1,14 @@
 # ✅ Todo REST API (.NET 8 + Azure AD + Clean Architecture)
 
-This **Todo REST API** allows users to manage their to-do list. It's built with **C#**, **.NET 8**, and integrated with **Azure AD** for secure user authentication via **OAuth 2.0 (Authorization Code Flow with PKCE)**.
+This **Todo REST API** allows users to manage their to-do list. It's built with **C#**, **.NET 8**, and integrated with **Azure AD** for secure user authentication via **OAuth 2.0** (Authorization Code Flow with PKCE). 
 
 ---
+
 ## Tech Stack
 
 <p>
   <img src= "https://img.shields.io/badge/C%23-003f90?style=for-the-badge" alt="C#"/>
-  <img src= "https://img.shields.io/badge/.NET-512bd4?style=for-the-badge" alt=".NET"/>
+  <img src= "https://img.shields.io/badge/.NET 8-512bd4?style=for-the-badge" alt=".NET"/>
   <img src= "https://img.shields.io/badge/Azure%20AD-1e90ff?style=for-the-badge" alt="Azure AD"/>
   <img src= "https://img.shields.io/badge/SQL%20SERVER-ffef00?style=for-the-badge" alt="SQL Server"/>
   <img src= "https://img.shields.io/badge/Entity_Framework-512bd4?style=for-the-badge" alt="EF Core"/>
@@ -28,7 +29,6 @@ This **Todo REST API** allows users to manage their to-do list. It's built with 
 - 🧪 **Unit Testing** with xUnit & Moq
 - 🛡 **API Rate Limiting** using built-in ASP.NET 8 middleware
 
----
 
 ## 🎯 Why This Project Was Built
 
@@ -42,7 +42,7 @@ The aim was to go beyond basic CRUD implementation and target **real-world, ente
 
 This idea has been further extended by simulating how an **enterprise-grade API** might be designed, secured, and documented.
 
----
+
 ## 🧱 Project Architecture
 
 The project uses **Clean Architecture** to ensure:
@@ -61,7 +61,6 @@ This API uses **OAuth 2.0 Authorization Code Flow with PKCE**, designed for secu
 - PKCE enhances security for public clients.
 - Confidential clients (like server-side apps) can use the flow **without PKCE**.
 
----
 
 ## 🧭 Azure AD Setup Instructions (Microsoft Entra ID)
 
@@ -90,49 +89,63 @@ This API uses **OAuth 2.0 Authorization Code Flow with PKCE**, designed for secu
 1. In **Enterprise Applications** > `todo-api-backend`
 2. Assign app roles (`admin`, `user`) to users
 
----
 ## ⚙️ Getting Started
-Once the project is cloned, there are 2 ways to interact with API :
 
-### 🚀 **Option 1: Using Swagger UI**
+### 1️⃣ Clone the Repository
+### 2️⃣ Prepare the Environment
+#### - Restore NuGet packages 
+ ```bash
+dotnet restore
+```
+#### - Build Solution 
+```bash
+dotnet build
+```
+#### - Apply EF Core migrations to create the database
+```bash
+dotnet ef database update
+```
+Once the project is configured, there are 2 ways to interact with API :
+
+#### 🚀 **Option 1: Using Swagger UI**
 
 ✅ **Configuration**
 
 1. Edit **appsettings.json**
 Replace placeholder values in the "AzureAd" section:
-`
+```bash
 "AzureAd": {
   "TenantId": "{your-tenant-id}",
   "ClientId": "{your-frontend-app-id}",
   "Audience": "{your-backend-app-id}",
-  "Domain": "{your-azure-domain}"`
+  "Domain": "{your-azure-domain}"
+```
 
 2. Edit **SwaggerServiceExtensions.cs**
 Replace hardcoded values used for OAuth2 flow in Swagger UI setup:
-`
+```bash
 AuthorizationUrl = new Uri("https://login.microsoftonline.com/{your-tenant-id}/oauth2/v2.0/authorize"),
 TokenUrl = new Uri("https://login.microsoftonline.com/{your-tenant-id}/oauth2/v2.0/token"),
 Scopes = new Dictionary<string, string>
 {
     { "api://{your-backend-app-id}/access-as-user", "Access Todo API" }
 }
-`
+```
 ✅ This enables the Authorize button in Swagger UI for OAuth2.
 
 > [!IMPORTANT]
 Updating above files with your Azure values is required to run the project with **Swagger**
 
 ▶️ **Run**
-1. Run the API: dotnet run
+1. Run the API: `dotnet run`
 2. Open https://localhost:7280/todoApi/docs/index.html
 3. Click Authorize, login via Azure AD
 
-Use Try it out to call endpoints.
+Use **Try it out** to call endpoints.
 
----
-### 📬 **Option 2: Using Postman**
+#### 📬 **Option 2: Using Postman**
 
-#### ✅ **Configuration**
+##### ✅ **Configuration**
 
 - Update `appsetting.json`(similar to above Swagger option)
 - No need to modify ` SwaggerServiceExtensions.cs`
@@ -140,18 +153,15 @@ Use Try it out to call endpoints.
 
 > Postman is used here to simulate a **public client** using the API with OAuth2 + PKCE.
 
-#### 🔑 Authorization Setup:
+##### 🔑 Authorization Setup:
 Once the import is successful, use the Postman's Authorization tab to update below placeholders with actual values. 
-
 -> `{your-tenantId}` : Your Azure AD(Entra ID) Tenant ID
-
 -> `{your-frontend-app-id}` : Application(client) ID of your Front-end app or Postman App on Azure. 
-
 -> `{your-backend-app-id}` :  Application(client) ID of your Backend Todo API on Azure.
 
 Below is how your Postman's Authorization tab(🟩green-highlighted) will look like, once all the values are filled in as per above instructions. 
 
-##### Screenshot Example
+###### Screenshot Example
 
 ![Postman OAuth Configuration](assets/postman-oauth-setup.png)
 
@@ -166,9 +176,9 @@ The token will be injected into Postman's current Token field (🔵 blue-highlig
 
 Ensure the **Header Prefix** is set to Bearer
 
-✅ Now, you are all set to make API calls.  
+✅ Now, you are all set to make API calls. 
 
----
+
 ## 📘 Swagger & OpenAPI
 
 The project uses **Swashbuckle** to auto-generate Swagger UI from OpenAPI specs and XML comments.
@@ -189,5 +199,5 @@ The project uses **Swashbuckle** to auto-generate Swagger UI from OpenAPI specs 
 This is a personal project but any suggestions or recommendations are welcome.
 
 ## 📄 License
-This project is licensed under the [MIT License] (LICENSE).
+This project is licensed under the [MIT License](./LICENSE).
 
