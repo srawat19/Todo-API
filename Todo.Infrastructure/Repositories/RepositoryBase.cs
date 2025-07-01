@@ -13,7 +13,6 @@ namespace Todo.Infrastructure.Repositories
         {
             _todoDbContext = todoAppDbContext;
             _dbSet = _todoDbContext.Set<T>();
-            _dbSet = _todoDbContext.Set<T>();
 
         }
 
