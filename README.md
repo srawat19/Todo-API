@@ -87,12 +87,13 @@ This API uses **OAuth 2.0 Authorization Code Flow with PKCE**, designed for secu
   - Click **Add a platform**
   - Select SPA (This is needed to work with Swagger)
   - Add Swagger redirect url 'https://localhost:7280/todoApi/docs/oauth2-redirect.html'
+  - Select **Mobile and desktop applications** (This is needed to work with Postman)
   - Add Postman redirect url 'https://oauth.pstmn.io/v1/callback'
 
 ### 3️⃣ Create Users and Assign Roles
 
 1. In **Enterprise Applications** > `todo-api-backend`
-2. Assign app roles (`admin`, `user`) to users
+2. Assign app roles (`admin`, `user`,`guest`) to users
 
 ## ⚙️ Getting Started
 
